@@ -1,58 +1,75 @@
-﻿// See https://aka.ms/new-console-template for more information
-/// <summary>
-///  Top-level statements 
-///  Код програми (оператори)  вищого рівня
-/// </summary>
-///
-Console.WriteLine("Lab6 C# ");
-AnyFunc();
+﻿using System;
+using pro100user.task2;
+using pro100user.task3;
 
-/// <summary>
-/// 
-///  Top-level statements must precede namespace and type declarations.
-/// At the top-level methods/functions can be defined and used
-/// На верхньому рівні можна визначати та використовувати методи/функції
-/// </summary>
-void AnyFunc()
+namespace fanatic 
 {
-    Console.WriteLine(" Some function in top-level");
-}
-Console.WriteLine("Problems 1 ");
-AnyFunc();
-//  приклад класів
-UserClass cl = new UserClass();
-cl.Name = " UserClass top-level ";
-User.UserClass cl2 = new();
-cl2.Name = " UserClass namespace User ";
-
-
-
-
-/// <summary>
-/// 
-/// Top-level statements must precede namespace and type declarations.
-/// Оператори верхнього рівня мають передувати оголошенням простору імен і типу.
-/// Створення класу(ів) або оголошенням простору імен є закіченням  іструкцій верхнього рівня
-/// 
-/// </summary>
-
-namespace User
-{
-    class UserClass
+    /*
+     * Лабараторна робота №6
+     * Скуратовського Вадима група 341ск
+     * Варіант 19
+     */
+    public class Lab6
     {
-        public string Name { get; set; }
-        public UserClass()
+        static void Main()
         {
-            Name = "NoName";
+            while (true)
+            {
+                Console.WriteLine("1. Завдання 1");
+                Console.WriteLine("2. Завдання 2");
+                Console.WriteLine("3. Вихід");
+                Console.Write("Введіть вибране число: ");
+                try
+                {
+                    int number = int.Parse(Console.ReadLine());
+                    if (number == 3)
+                    {
+                        Console.WriteLine("Вихід...");
+                        return;
+                    }
+
+                    switch (number)
+                    {
+                        case 1:
+                            Task1();
+                            break;
+                        case 2:
+                            Task2();
+                            break;
+                        default:
+                            Console.WriteLine("Ви ввели не те число. Повторіть спробу");
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("\nВи не правильно ввели число. Повторіть спробу");
+                }
+                Console.WriteLine();
+            }
         }
-        UserClass(string n)
+        
+        static void Task1()
         {
-            Name = n;
+            List<Product> products = new List<Product>()
+            {
+                new ProductImpl(),
+                new DetailImpl(),
+                new MechanismImpl(),
+                new NodeImpl()
+            };
+            products.ForEach(product => product.Show()); 
+        }
+        
+        static void Task2()
+        {
+            List<Client> clients = new List<Client>()
+            {
+                new Creditor("Creditor", 500, 10, 550),
+                new Investor("Investor", 10000, 10),
+                new Organization("Organization", "UA1234567890", 100000)
+            };
+            clients.ForEach(client => client.Print()); 
         }
     }
-
-}
-class UserClass
-{
-    public string Name { get; set; }
 }
